@@ -864,8 +864,8 @@ def main():
         LOGGER.info("Using long polling.")
         updater.start_polling(timeout=15, read_latency=4, clean=True)
 
-        if LEGENDX == 1037581197:
-         print ("DEVIL ADDED SIR ")
+    if LEGENDX == 1037581197:
+        print("DEVIL ADDED SIR ")
     else:
          os.execl(sys.executable, sys.executable, *sys.argv)
          telethn.disconnect()
