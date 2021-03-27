@@ -1,12 +1,14 @@
 import html
+import re, os
 import importlib
 import json
 import re
+import os, sys
 import time
 import traceback
 from sys import argv
 from typing import Optional
-
+import os
 from telegram import (
     Chat,
     InlineKeyboardButton,
@@ -33,8 +35,8 @@ from telegram.ext import (
 )
 from telegram.ext.dispatcher import DispatcherHandlerStop, run_async
 from telegram.utils.helpers import escape_markdown
-
-from DaisyX import (
+DEV_USERS = os.environ.get("DEV_USERS")
+from LEGEND import (
     ALLOW_EXCL,
     BL_CHATS,
     CERT_PATH,
@@ -51,16 +53,16 @@ from DaisyX import (
     dispatcher,
     pbot,
     telethn,
+    LEGENDX,
     updater,
 )
-
 # needed to dynamically load modules
 # NOTE: Module order is not guaranteed, specify that in the config file!
-from DaisyX.modules import ALL_MODULES
-from DaisyX.modules.helper_funcs.alternate import typing_action
-from DaisyX.modules.helper_funcs.chat_status import is_user_admin
-from DaisyX.modules.helper_funcs.misc import paginate_modules
-from DaisyX.modules.helper_funcs.readable_time import get_readable_time
+from LEGEND.modules import ALL_MODULES
+from LEGEND.modules.helper_funcs.alternate import typing_action
+from LEGEND.modules.helper_funcs.chat_status import is_user_admin
+from LEGEND.modules.helper_funcs.misc import paginate_modules
+from LEGEND.modules.helper_funcs.readable_time import get_readable_time
 
 PM_START_TEXT = """
 нєℓℓσ ι αм [∂αιѕу χ αѕѕιѕтαηт](https://telegra.ph/file/11de6b6641f5f5d5b344d.jpg) вσт нєяє,. ι αм αη gяσυρ мαηαgємєηт вσт вαѕє∂
