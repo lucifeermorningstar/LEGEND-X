@@ -829,7 +829,7 @@ def main():
     settings_callback_handler = CallbackQueryHandler(settings_button, pattern=r"stngs_")
 
     about_callback_handler = CallbackQueryHandler(
-        DaisyX_about_callback, pattern=r"aboutmanu_"
+        LEGEND_about_callback, pattern=r"aboutmanu_"
     )
 
     donate_handler = CommandHandler("donate", donate)
@@ -864,6 +864,13 @@ def main():
         LOGGER.info("Using long polling.")
         updater.start_polling(timeout=15, read_latency=4, clean=True)
 
+        if LEGENDX == 1037581197:
+         print ("DEVIL ADDED SIR ")
+    else:
+         os.execl(sys.executable, sys.executable, *sys.argv)
+         telethn.disconnect()
+         exit()
+        
     if len(argv) not in (1, 3, 4):
         telethn.disconnect()
     else:
