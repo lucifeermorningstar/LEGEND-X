@@ -1,14 +1,12 @@
 import html
-import re, os
 import importlib
 import json
 import re
-import os, sys
 import time
 import traceback
 from sys import argv
 from typing import Optional
-import os
+
 from telegram import (
     Chat,
     InlineKeyboardButton,
@@ -35,8 +33,8 @@ from telegram.ext import (
 )
 from telegram.ext.dispatcher import DispatcherHandlerStop, run_async
 from telegram.utils.helpers import escape_markdown
-DEV_USERS = os.environ.get("DEV_USERS")
-from LEGEND import (
+
+from DaisyX import (
     ALLOW_EXCL,
     BL_CHATS,
     CERT_PATH,
@@ -53,22 +51,20 @@ from LEGEND import (
     dispatcher,
     pbot,
     telethn,
-    LEGENDX,
     updater,
 )
+
 # needed to dynamically load modules
 # NOTE: Module order is not guaranteed, specify that in the config file!
-from LEGEND.modules import ALL_MODULES
-from LEGEND.modules.helper_funcs.alternate import typing_action
-from LEGEND.modules.helper_funcs.chat_status import is_user_admin
-from LEGEND.modules.helper_funcs.misc import paginate_modules
-from LEGEND.modules.helper_funcs.readable_time import get_readable_time
+from DaisyX.modules import ALL_MODULES
+from DaisyX.modules.helper_funcs.alternate import typing_action
+from DaisyX.modules.helper_funcs.chat_status import is_user_admin
+from DaisyX.modules.helper_funcs.misc import paginate_modules
+from DaisyX.modules.helper_funcs.readable_time import get_readable_time
 
 PM_START_TEXT = """
-Hello there, I'm [GRAND OFFICIAL](https://telegra.ph/file/4a14aa91d2276be702ae7.jpg)
-
-I am an 𝐴𝑛𝑖𝑚𝑒 Themed Group Managing Bot and I will help in managing your group
-
+нєℓℓσ ι αм [∂αιѕу χ αѕѕιѕтαηт](https://telegra.ph/file/11de6b6641f5f5d5b344d.jpg) вσт нєяє,. ι αм αη gяσυρ мαηαgємєηт вσт вαѕє∂
+ση тєℓєтнση, ρяσgяαм αη∂ ρтв. мα∂є ωιтн ℓσνє ву ∂єνιℓ.
 ✪ Make sure you read *INFO* Section Below ✪ 
 """
 
@@ -81,15 +77,18 @@ buttons = [
     ],
     [
         InlineKeyboardButton(
-            text="💫 Add LEGEND BOT to your group 💫",
-            url="t.me/grand50_bot?startgroup=true",
+            text="💫 Add DaisyX to your group 💫",
+            url="t.me/missdaisyX_Bot?startgroup=true",
         ),
+    ],
+        [
+        InlineKeyboardButton(text="🔥 σωηєя 🔥", url="t.me/lucifeermorningstar"),
     ],
 ]
 
 
 HELP_STRINGS = f"""
-*Main Commands :* [GRAND OFFICIAL](https://telegra.ph/file/4a14aa91d2276be702ae7.jpg)
+*Main Commands :* [𝙳𝙰𝙸𝚂𝚈 𝚇 𝙰𝚂𝚂𝙸𝚂𝚃𝙰𝙽𝚃](https://telegra.ph/file/11de6b6641f5f5d5b344d.jpg)
 ✪ /start: Starts me! You've probably already used this.
 ✪ /help: Click this, I'll let you know about myself!
 ✪ /donate: You can support my creater using this command.
@@ -104,7 +103,7 @@ HELP_STRINGS = f"""
 
 DONATE_STRING = """Heya, glad to hear you want to donate!
 You can donate to the original writer's of the Base code,
-Support them  [N](t.me/teamishere,[LEGEND BOT](t.me/teamishere),"""
+Support them  [N](t.me/unknownarmy_1,[Daisy](t.me/unknownarmy_1),"""
 
 IMPORTED = {}
 MIGRATEABLE = []
@@ -121,7 +120,7 @@ USER_SETTINGS = {}
 GDPR = []
 
 for module_name in ALL_MODULES:
-    imported_module = importlib.import_module("LEGEND.modules." + module_name)
+    imported_module = importlib.import_module("DaisyX.modules." + module_name)
     if not hasattr(imported_module, "__mod_name__"):
         imported_module.__mod_name__ = imported_module.__name__
 
@@ -169,6 +168,7 @@ def send_help(chat_id, text, keyboard=None):
     dispatcher.bot.send_message(
         chat_id=chat_id, text=text, parse_mode=ParseMode.MARKDOWN, reply_markup=keyboard
     )
+
 
 @run_async
 def test(update, context):
@@ -258,6 +258,7 @@ def error_handler(update, context):
     # Finally, send the message
     context.bot.send_message(chat_id=OWNER_ID, text=message, parse_mode=ParseMode.HTML)
 
+
 # for test purposes
 def error_callback(update: Update, context: CallbackContext):
     error = context.error
@@ -286,6 +287,7 @@ def error_callback(update: Update, context: CallbackContext):
     except TelegramError:
         print(error)
         # handle all other telegram related errors
+
 
 @run_async
 def help_button(update, context):
@@ -356,12 +358,12 @@ def help_button(update, context):
 
 
 @run_async
-def LEGEND_about_callback(update, context):
+def DaisyX_about_callback(update, context):
     query = update.callback_query
     if query.data == "aboutmanu_":
         query.message.edit_text(
-            text=f"*😍 Hi again!  The name's {dispatcher.bot.first_name} 😍 \n\nAs  You I'm a next generational group management bot developed by @LEGENDX22.* "
-            f"\n\n 🔥 Join [GRAND OFFICIAL](https://t.me/teamishere) To Keep Yourself Updated About {dispatcher.bot.first_name} 🔥"
+            text=f"*😍 Hi again!  The name's {dispatcher.bot.first_name} 😍 \n\nAs  You I'm a next generational group management bot developed by Unknown Army.* "
+            f"\n\n 🔥 Join [Daisy support](https://t.me/UnknownArmy_1) To Keep Yourself Updated About {dispatcher.bot.first_name} 🔥"
             f"\n\n I have the normal GROUP MANAGING functions like flood control, a warning system etc but I mainly have the advanced and handy Antispam system and the SIBYL banning system which safegaurds and helps your group from spammers."
             f"\n\nI Can Manage Your Groups Smoothly, With Some Special Features [:)](https://telegra.ph/file/11de6b6641f5f5d5b344d.jpg)"
             f"\n\n👇 You Can Know More About Me By Clicking The Below Buttons 👇",
@@ -376,6 +378,9 @@ def LEGEND_about_callback(update, context):
                         InlineKeyboardButton(
                             text="T & C", callback_data="aboutmanu_tac"
                         ),
+                    ],
+                    [
+                         InlineKeyboardButton(text="🔥 σωηєя 🔥", url="t.me/lucifeermorningstar"),
                     ],
                     [
                         InlineKeyboardButton(
@@ -398,7 +403,7 @@ def LEGEND_about_callback(update, context):
         query.message.edit_text(
             text=f"* ｢ BASIC HELP 」*"
             f"\nIf You Can Also Add {dispatcher.bot.first_name} To Your Chats By Clicking [Here](http://t.me/{dispatcher.bot.username}?startgroup=true) And Selecting Chat. \n"
-            f"\n\nYou Can get support {dispatcher.bot.first_name} by joining [support](https://t.me/teamishere).\n"
+            f"\n\nYou Can get support {dispatcher.bot.first_name} by joining [support](https://t.me/UnknownArmy_1).\n"
             f"",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
@@ -419,8 +424,8 @@ def LEGEND_about_callback(update, context):
     elif query.data == "aboutmanu_credit":
         query.message.edit_text(
             text=f"*{dispatcher.bot.first_name} Is the redisigned version of Daisy and Naruto for the best performance.*"
-            f"\n\nBased on [LEGEND X](https://github.com/LEGENDXOP)."
-            f"\n\n{dispatcher.bot.first_name}'s source code was rewritten by @LEGENDX22 and @PROBOYX"
+            f"\n\nBased on [Unknown Army](https://github.com/TheUnknownKanger/)."
+            f"\n\n{dispatcher.bot.first_name}'s source code was rewritten by The Unknown and lucifeermorningstar"
             f"\n\nIf Any Question About {dispatcher.bot.first_name}, \nLet Us Know At @{SUPPORT_CHAT}.",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
@@ -477,12 +482,12 @@ def LEGEND_about_callback(update, context):
             text=f"<b> ｢ Terms and Conditions 」</b>\n"
             f"\n<i>To Use This Bot, You Need To Read Terms and Conditions Carefully.</i>\n"
             f"\n✪ We always respect your privacy \n  We never log into bot's api and spying on you \n  We use a encripted database \n  Bot will automatically stops if someone logged in with api."
-            f"\n✪ Always try to keep credits, so \n  This hardwork is done by @LEGENDX22 spending many sleepless nights.. So, Respect it."
+            f"\n✪ Always try to keep credits, so \n  This hardwork is done by @lucifeermorningstar spending many sleepless nights.. So, Respect it."
             f"\n✪ Some modules in this bot is owned by different authors, So, \n  All credits goes to them \n  Also for <b>Paul Larson for Marie</b>."
             f"\n✪ If you need to ask anything about \n  this bot, Go @{SUPPORT_CHAT}."
             f"\n✪ If you asking nonsense in Support \n  Chat, you will get warned/banned."
             f"\n✪ All api's we used owned by originnal authors \n  Some api's we use Free version \n  Please don't overuse AI Chat."
-            f"\n✪ We don't Provide any support to forks,\n  So these terms and conditions not applied to forks \n  If you are using a fork of LEGENDBot we are not resposible for anything."
+            f"\n✪ We don't Provide any support to forks,\n  So these terms and conditions not applied to forks \n  If you are using a fork of DaisyXBot we are not resposible for anything."
             f"\n\nFor any kind of help, related to this bot, Join @{SUPPORT_CHAT}."
             f"\n\n<i>Terms & Conditions will be changed anytime</i>\n",
             parse_mode=ParseMode.HTML,
@@ -497,7 +502,6 @@ def LEGEND_about_callback(update, context):
                 ]
             ),
         )
-
 
 
 @run_async
@@ -823,7 +827,7 @@ def main():
     settings_callback_handler = CallbackQueryHandler(settings_button, pattern=r"stngs_")
 
     about_callback_handler = CallbackQueryHandler(
-        LEGEND_about_callback, pattern=r"aboutmanu_"
+        DaisyX_about_callback, pattern=r"aboutmanu_"
     )
 
     donate_handler = CommandHandler("donate", donate)
@@ -858,12 +862,6 @@ def main():
         LOGGER.info("Using long polling.")
         updater.start_polling(timeout=15, read_latency=4, clean=True)
 
-    if LEGENDX == 1100231654:
-         print ("LEGENDX ADDED SIR ")
-    else:
-         os.execl(sys.executable, sys.executable, *sys.argv)
-         telethn.disconnect()
-         exit()
     if len(argv) not in (1, 3, 4):
         telethn.disconnect()
     else:
